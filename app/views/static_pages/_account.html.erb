@@ -1,0 +1,13 @@
+<div id="logo-introduce">
+  <p>TaskAppは簡易ToDo管理ツールです。</p>
+  <p>↓↓初めてのご利用↓↓</p>
+  <!--管理者ユーザー-->
+  <% if logged_in? && current_user.admin? %>
+    <%= link_to "アカウント作成", signup_path, class: "btn btn-lg btn-success" %>
+  <!--一般ユーザー-->
+  <% elsif logged_in? %>
+    <%= link_to "アカウント作成", signup_path, class: "btn btn-lg btn-success disabled" %>
+  <% else %>
+    <%= link_to "アカウント作成", signup_path, class: "btn btn-lg btn-success" %>
+  <% end %>
+</div>

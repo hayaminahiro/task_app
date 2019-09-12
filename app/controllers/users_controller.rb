@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   
+  before_action :url_confirmation_signup_page, only: :new
+  
   def show
     @user = User.find(params[:id])
   end
@@ -16,6 +18,16 @@ class UsersController < ApplicationController
       redirect_to @user
     else
       render :new
+    end
+  end
+  
+  def index
+  end
+  
+  def url_confirmation_signup_page
+    if current_user && !current_user.admin?
+      flash[:danger] = "一般ユーザーの閲覧はできません。"
+      redirect_to root_url
     end
   end
   

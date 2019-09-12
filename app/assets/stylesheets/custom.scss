@@ -57,15 +57,40 @@ p {
   margin-right: 10px;
   font-size: 1.7em;
   color: #fff;
-  text-transform: uppercase;
+  // text-transform: uppercase;
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
+  font-style: italic;
 }
 
 #logo:hover {
-  color: #fff;
+  color: silver;
   text-decoration: none;
+}
+
+
+// ヘッダーロゴ（左）の背景色・・・開発者ツールで直参照
+.navbar-inverse {
+  background-color: teal;
+}
+
+// ヘッダー右側リンク・・・開発者ツールで直参照
+.navbar-inverse .navbar-nav > li > a {
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;  
+}
+
+// ヘッダー右側リンクのhover指定
+.navbar-inverse .navbar-nav > li > a:hover {
+  color: silver;
+  text-decoration: none;
+}
+
+// ドロップダウン
+.dropdown-header {
+  background-color :rgba(200,200,200,0.5);
 }
 
 /* デバッグウインドウ */
@@ -95,4 +120,25 @@ p {
   .form-control {
     color: $state-danger-text;
   }
+}
+
+#top-logo {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 5em;
+  margin: 50px;
+}
+
+#logo-introduce {
+  font-size: 1.5em;
+  text-align: center
+}
+
+#login-css {
+  font-size: 50px;
+  margin-top: 50px;
+}
+
+#login-logo {
+  margin-right: 180px;
 }

@@ -8,4 +8,9 @@ module ApplicationHelper
       page_name + " | " + base_title
     end
   end
+  
+  def user_name(user)
+    @user.name
+  end
+  
 end
