@@ -5,8 +5,10 @@ Rails.application.routes.draw do
   post   '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   
+  # 利用者一覧ページ
   get    '/users', to: 'users#index'
   
-  
-  resources :users
+  resources :users do
+    resources :tasks
+  end
 end
