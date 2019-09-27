@@ -8,7 +8,10 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: true
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+
+  # allow_nil: true は対象の値がnilの時、バリデーションをスキップする。
+  # つまりユーザー情報編集時、パスワードを再入力しなくても編集可能になる。
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost

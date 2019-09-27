@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   
   # 利用者一覧ページ
-  get    '/users', to: 'users#index'
-  
+  get  '/users', to: 'users#index'
+
   resources :users do
     resources :tasks
   end

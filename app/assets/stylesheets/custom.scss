@@ -23,7 +23,7 @@ textarea {
   margin-bottom: 10px;
 }
 
-/* タイポグラフィ */
+  /* タイポグラフィ */
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
@@ -144,5 +144,50 @@ p {
 }
 
 #task-new-btn {
+  float: right;
+}
+
+.new-btn {
+  margin: 10px 0;
+}
+
+.active {
+  text-align: center;
+}
+
+/* ユーザー情報テーブル */
+
+.user-table {
+  vertical-align: middle;
+  text-align: center;
+}
+
+/* 入力フォーム */
+
+.label-signup {
+  margin-top: 5px;
+}
+
+.btn-signup {
+  margin-top: 10px;
+}
+
+.label-user--edit {
+  margin-top: 5px;
+}
+
+.btn-user--edit {
+  margin-top: 10px;
+}
+
+/* ユーザー一覧ページ */
+
+#table-users {
+  td {
+    vertical-align: middle;
+  }
+}
+
+#btn-delete {
   float: right;
 }

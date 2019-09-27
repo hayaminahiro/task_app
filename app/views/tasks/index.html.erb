@@ -5,7 +5,7 @@
 <div class="col-md-10 col-md-offset-1">
   <table class="table table-condensed table-hover" id="table-users">
     <div id="task-new-btn">
-      <%= link_to "タスク新規作成", "#", class: "btn btn-lg btn-primary" %>
+      <%= link_to "タスク新規作成", new_user_task_path(@user), class: "btn btn-lg btn-primary" %>
     </div>
     <thead>
       <tr>
@@ -14,16 +14,16 @@
       </tr>
     </thead>
 
-    <% @tasks_title.each do |task| %>
+    <% @tasks.each do |t| %>
       <tr>
-        <td><%= task %></td>
-        <td></td>
         <td>
-          <%= link_to "編集", "#", class: "btn btn-success" %>
-          <%= link_to "削除", task, method: :delete,
-              data: { confirm: "削除してよろしいですか？" }, class: "btn btn-danger" %>
-              
-          
+          <%= link_to t.task_title, user_task_url(@user, t.id) %>
+        </td>
+        <td><%= l(t.created_at, format: :short) %></td>
+        <td>
+          <%= link_to "編集", edit_user_task_path(@user, t.id), class: "btn btn-success" %>
+          <%= link_to "削除", user_task_path(@user, t.id), method: :delete,
+              data: { confirm: "「#{t.task_title}」を削除してよろしいですか？" }, class: "btn btn-danger" %>
         </td>
       </tr>
       

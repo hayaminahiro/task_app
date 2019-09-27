@@ -1,9 +1,15 @@
 class UsersController < ApplicationController
-  
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :show, :edit, :update]
+  before_action :correct_user, only: [:edit, :update]
   before_action :url_confirmation_signup_page, only: :new
-  
+  before_action :admin_user, only: [:index, :destroy]
+
+  def index
+    @users = User.paginate(page: params[:page], per_page: 20)
+  end
+
   def show
-    @user = User.find(params[:id])
   end
 
   def new
@@ -20,14 +26,23 @@ class UsersController < ApplicationController
       render :new
     end
   end
-  
-  def index
+
+  def edit
   end
-  
-  def url_confirmation_signup_page
-    if current_user && !current_user.admin?
-      flash[:danger] = "一般ユーザーの閲覧はできません。"
-      redirect_to root_url
+
+  def update
+    if @user.update_attributes(user_params)
+      flash[:success] = "ユーザー情報を更新しました。"
+      redirect_to @user
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    if @user.destroy
+      flash[:success] = "ユーザー情報を削除しました。"
+      redirect_to users_url
     end
   end
   
@@ -36,4 +51,46 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
+
+    # beforeフィルター
+
+    # paramsハッシュからユーザーを取得します。
+    def set_user
+      @user = User.find(params[:id])
+    end
+
+    # ログイン済みのユーザーか確認します。
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "ログインしてください。"
+        redirect_to login_url
+      end
+    end
+
+    # アクセスしたユーザーが現在ログインしているユーザーか確認します。
+    def correct_user
+      redirect_to(root_url) unless current_user?(@user)
+    end
+
+    # システム管理権限所有かどうか判定します。
+    def admin_user
+      redirect_to root_url unless current_user.admin?
+    end
+
+    def url_confirmation_signup_page
+      if current_user && !current_user.admin?
+        flash[:info] = "すでにログインしています。"
+        redirect_to user_url(current_user.id)
+      end
+    end
+
+
 end
+
+# ログインしていたらtrueを返す！
+# def logged_in?
+#   !current_user.nil?
+# end
+# session_helper.rbで定義
+
+# login_urlはsession#newつまりログインページのurl
